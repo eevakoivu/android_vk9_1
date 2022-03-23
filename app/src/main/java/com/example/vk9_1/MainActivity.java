@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,9 +21,9 @@ import android.widget.TimePicker;
 
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
-    Spinner theaters = null;
+    Spinner spinner = null;
     Button timebutton = null;
     CalendarView calendarView = null;
     EditText editText = null;
@@ -33,27 +36,28 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             "Tampere Plevna", "Turku Kinopalatsi"};
     String[] movies = {"movie1", "movie2", "movie3"};
 
-    ArrayAdapter<String> adapter = null;
+    ArrayAdapter<String> adapter2 = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        theaters = (Spinner) findViewById(R.id.theaters);
+        spinner = (Spinner) findViewById(R.id.spinner);
         timebutton = (Button) findViewById(R.id.timebutton);
         calendarView = (CalendarView) findViewById(R.id.calendarView);
         editText = (EditText) findViewById(R.id.editText);
         listView = (ListView) findViewById(R.id.listView);
 
         spinner();
-        calendarView();
+        //calendarView();
+        listView();
         editText();
 
 
     }
 
     public void spinner(){
-        theaters.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -65,15 +69,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, theaterlist);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, theaterlist);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        theaters.setAdapter(adapter);
+        spinner.setAdapter(adapter);
 
 
     }
 
+    //datepicker??
     public void calendarView(){
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -104,14 +109,29 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     //edittext
     //nimi.setontextchangelastener(new NiMi.OntextchangeListener)
     public void listView(){
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, movies);
-        listView.setAdapter(adapter);
+        adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, movies);
+        listView.setAdapter(adapter2);
     }
 
 
     public void editText(){
-        editText.setOn
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                adapter2.getFilter().filter(editable);
+            }
+        });
+        /*searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 adapter.getFilter().filter(s);
@@ -122,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             public boolean onQueryTextChange(String s) {
                 return false;
             }
-        });
+        }); */
     }
 
 

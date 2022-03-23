@@ -131,18 +131,6 @@ public class MainActivity extends AppCompatActivity {
                 adapter2.getFilter().filter(editable);
             }
         });
-        /*searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                adapter.getFilter().filter(s);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                return false;
-            }
-        }); */
     }
 
 

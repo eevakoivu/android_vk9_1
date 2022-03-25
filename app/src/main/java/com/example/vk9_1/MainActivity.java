@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listView);
 
         spinner();
-        //calendarView();
+        calendarView();
         listView();
         editText();
 
@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //datepicker??
     public void calendarView(){
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -86,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
                 year=i;
                 month=i1+1;
                 day=i2;
-                //System.out.println(day+"."+month+"."+year);
             }
         });
     }
@@ -106,8 +104,6 @@ public class MainActivity extends AppCompatActivity {
         timePickerDialog.show();
     }
 
-    //edittext
-    //nimi.setontextchangelastener(new NiMi.OntextchangeListener)
     public void listView(){
         adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, movies);
         listView.setAdapter(adapter2);
